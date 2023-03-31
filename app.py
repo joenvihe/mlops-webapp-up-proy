@@ -80,7 +80,7 @@ def predict_api(data_json):
                 predicted_classes = json.loads(predictions.json())
                 prediction = predicted_classes[0]
             except Exception as e:
-                return "error 2 {}".format(str(e)) 
+                return "error 2 {}".format(str(e)+"**"+str(endpoint)) 
             return prediction 
         else:
             return "Values entered are not Numerical"    
