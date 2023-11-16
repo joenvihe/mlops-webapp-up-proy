@@ -16,6 +16,8 @@ params_path = "params.yaml"
 
 @app.route("/")
 def home():
+    app.logger.info("Página principal solicitada.")  # Mensaje de log
+    print("log")
     return render_template('index.html')
 
 @app.route('/predict',methods=['POST','GET'])
