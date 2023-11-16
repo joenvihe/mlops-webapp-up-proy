@@ -22,30 +22,32 @@ def home():
 
 @app.route('/predict',methods=['POST','GET'])
 def GetValues():
-
-    pregnancies = request.form.get('pregnancies')
-    plasmaglucose = request.form.get('plasmaglucose')
-    diastolicbloodpressure = request.form.get('diastolicbloodpressure')
-    tricepsthickness = request.form.get('tricepsthickness')
-    seruminsulin = request.form.get('seruminsulin')
-    bmi = request.form.get('bmi')
-    diabetespedigree = request.form.get('diabetespedigree')
-    age = request.form.get('age')
-    
-    data_json = []
-    val = []
-    val.append(pregnancies)
-    val.append(plasmaglucose)
-    val.append(diastolicbloodpressure)
-    val.append(tricepsthickness)
-    val.append(seruminsulin)
-    val.append(bmi)
-    val.append(diabetespedigree)
-    val.append(age) 
-    data_json.append(val)
+    try:
+        pregnancies = request.form.get('pregnancies')
+        plasmaglucose = request.form.get('plasmaglucose')
+        diastolicbloodpressure = request.form.get('diastolicbloodpressure')
+        tricepsthickness = request.form.get('tricepsthickness')
+        seruminsulin = request.form.get('seruminsulin')
+        bmi = request.form.get('bmi')
+        diabetespedigree = request.form.get('diabetespedigree')
+        age = request.form.get('age')
         
-    op1 = predict_api(data_json)
-
+        data_json = []
+        val = []
+        val.append(pregnancies)
+        val.append(plasmaglucose)
+        val.append(diastolicbloodpressure)
+        val.append(tricepsthickness)
+        val.append(seruminsulin)
+        val.append(bmi)
+        val.append(diabetespedigree)
+        val.append(age) 
+        data_json.append(val)
+            
+        op1 = predict_api(data_json)
+    except Exception as e:
+        op1 = ""
+    
     return render_template('index.html', prediction_text='The person may: {}'.format(op1))
 
 def read_params(config_path):
